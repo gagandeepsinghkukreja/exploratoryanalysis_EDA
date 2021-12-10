@@ -1,0 +1,171 @@
+---
+title: "Exploratory Analysis"
+output:
+  pdf_document: default
+  html_document: default
+---
+```{r}
+library(ggplot2)
+library(tidyverse)
+library(plotrix)
+radii <- c(18.2,8.9,12.2,24.1,11.4,12.7,12.5)
+color <- c("lightgrey", "chartreuse", "yellow", "darkturquoise", "darkolivegreen3",
+           "orangered", "lightblue", "red")
+lbl <- c("Washing/Drying (18.2%)","Water Heating(8.9%)","Audiovisual(12.2%)","Lighting(24.1%)","Cooking(11.4%)","Cold Appliances(12.7%)", "Miscellaneous(12.5%)")
+
+
+radial.pie(radii,labels = radii, sector.colors = color,
+           show.grid = F, show.grid.labels = T ,show.radial.grid = F,
+           radial.labels = T, clockwise = T)
+legend("bottomright",pch =19,  legend = lbl,col = color, cex  = 0.6)
+
+
+```
+
+```{r}
+library(tidyverse)
+library(ggplot2)
+library(RColorBrewer)
+library(reshape2)
+
+```
+
+## R Markdown
+```{r}
+library(devtools)
+library(tidyverse)
+library(ggplot2)
+library(moonBook)
+library(webr)
+df <- read.csv('/Users/gagandeepsinghkukreja/Desktop/EDA/data/Houseconsumptionpattern.csv')
+PieDonut(df,aes(type,dis),explode=3,r1=0.9,explodeDonut=TRUE,star=3*pi/2,labelposition=0)
+```
+
+RosePlots  for household 3,4,5:
+## Including Plots
+
+You can also embed plots, for example:
+HOUSEHOLD 2:
+```{r}
+df <- read_csv("/Users/gagandeepsinghkukreja/Desktop/EDA/data/Monthly consumption/House2_monthly_consumption.csv")
+
+df=df[1:12,]
+data1=data.frame(t(df))
+data2=data1[5:13,]
+colnames(data2)=df$months
+data2$group=row.names(data2)
+data3=melt(data2,id="group")
+data3$value=as.numeric(data3$value)
+head(data3)
+ggplot(data=data3,aes(x=variable,y=value,fill=group))+
+  geom_bar(stat="identity")+
+  coord_polar()+
+  scale_fill_brewer(palette="greens")+xlab("")+ylab("")
+
+```
+HOUSEHOLD 3:
+
+```{r}
+df <- read_csv("/Users/gagandeepsinghkukreja/Desktop/EDA/data/Monthly consumption/House3_monthly_consumption.csv")
+
+df=df[1:12,]
+data1=data.frame(t(df))
+data2=data1[5:12,]
+colnames(data2)=df$months
+data2$group=row.names(data2)
+data3=melt(data2,id="group")
+data3$value=as.numeric(data3$value)
+head(data3)
+ggplot(data=data3,aes(x=variable,y=value,fill=group))+
+  geom_bar(stat="identity")+
+  coord_polar()+
+  scale_fill_brewer(palette="greens")+xlab("")+ylab("")
+```
+
+
+
+```{r}
+df <- read_csv("/Users/gagandeepsinghkukreja/Desktop/EDA/data/Monthly consumption/House5_monthly_consumption.csv")
+
+
+df=df[1:12,]
+data1=data.frame(t(df))
+data2=data1[5:12,]
+colnames(data2)=df$months
+data2$group=row.names(data2)
+data3=melt(data2,id="group")
+data3$value=as.numeric(data3$value)
+head(data3)
+ggplot(data=data3,aes(x=variable,y=value,fill=group))+
+  geom_bar(stat="identity")+
+  coord_polar()+
+  scale_fill_brewer(palette="greens")+xlab("")+ylab("")
+
+```
+
+Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
+```{r}
+df <- read_csv("/Users/gagandeepsinghkukreja/Desktop/EDA/data/Monthly consumption/House2_monthly_consumption.csv")
+
+df=df[1:12,]
+data1=data.frame(t(df))
+data2=data1[2:4,]
+colnames(data2)=df$months
+data2$group=row.names(data2)
+data3=melt(data2,id="group")
+data3$value=as.numeric(data3$value)
+head(data3)
+ggplot(data=data3,aes(x=variable,y=value,fill=group))+
+  geom_bar(stat="identity")+
+  coord_polar()+
+  scale_fill_brewer(palette="greens")+xlab("")+ylab("")
+```
+
+```{r}
+df <- read_csv("/Users/gagandeepsinghkukreja/Desktop/EDA/data/Monthly consumption/House3_monthly_consumption.csv")
+
+df=df[1:12,]
+data1=data.frame(t(df))
+data2=data1[2:4,]
+colnames(data2)=df$months
+data2$group=row.names(data2)
+data3=melt(data2,id="group")
+data3$value=as.numeric(data3$value)
+head(data3)
+ggplot(data=data3,aes(x=variable,y=value,fill=group))+
+  geom_bar(stat="identity")+
+  coord_polar()+
+  scale_fill_brewer(palette="greens")+xlab("")+ylab("")
+```
+
+```{r}
+df <- read_csv("/Users/gagandeepsinghkukreja/Desktop/EDA/data/Monthly consumption/House5_monthly_consumption.csv")
+
+df=df[1:12,]
+data1=data.frame(t(df))
+data2=data1[2:4,]
+colnames(data2)=df$months
+data2$group=row.names(data2)
+data3=melt(data2,id="group")
+data3$value=as.numeric(data3$value)
+head(data3)
+ggplot(data=data3,aes(x=variable,y=value,fill=group))+
+  geom_bar(stat="identity")+
+  coord_polar()+
+  scale_fill_brewer(palette="greens")+xlab("")+ylab("")
+```
+
+```{r}
+library(tidyverse)
+library(ggplot2)
+library(dplyr)
+library(lubridate)
+df <- read_csv("/Users/gagandeepsinghkukreja/Desktop/EDA/data/Monthly consumption/monthly2.csv")
+df1 <-df%>%
+  pivot_longer(Aggregate1:Aggregate21, names_to = 'household' , values_to = 'aggregate')
+df1$months<- lubridate::my(df1$months)
+ggplot(df1, aes(x=months,y=aggregate, fill= household), position="fill") + 
+  geom_area()	
+
+```
+
